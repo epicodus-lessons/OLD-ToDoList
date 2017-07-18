@@ -7,13 +7,13 @@ public class Task {
 
     private String description;
     private boolean completed;
-    private LocalDateTime createdAt;
     private int id;
+    private int categoryId;
 
-    public Task(String description){
+    public Task(String description, int categoryId){
         this.description = description;
         this.completed = false;
-        this.createdAt = LocalDateTime.now();
+        this.categoryId = categoryId;
     }
 
     public void setDescription(String description) {
@@ -22,6 +22,34 @@ public class Task {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public boolean getCompleted(){
+        return this.completed;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     @Override
@@ -33,31 +61,16 @@ public class Task {
 
         if (completed != task.completed) return false;
         if (id != task.id) return false;
-        return description != null ? description.equals(task.description) : task.description == null;
+        if (categoryId != task.categoryId) return false;
+        return description.equals(task.description);
     }
 
     @Override
     public int hashCode() {
-        int result = description != null ? description.hashCode() : 0;
+        int result = description.hashCode();
         result = 31 * result + (completed ? 1 : 0);
         result = 31 * result + id;
+        result = 31 * result + categoryId;
         return result;
     }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public boolean getCompleted(){
-        return this.completed;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return this.createdAt;
-    }
-
-    public int getId() {
-        return this.id;
-    }
-
 }
